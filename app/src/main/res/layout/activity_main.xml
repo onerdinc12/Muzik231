@@ -4,26 +4,65 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:orientation="vertical"
+    android:background="@drawable/arkaplan"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+
     tools:context="onder.com.jcplayerolucak.MainActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="0dp">
-    </android.support.v7.widget.RecyclerView>
+        android:orientation="horizontal"
 
-    <com.example.jean.jcplayer.JcPlayerView
-        android:id="@+id/jcplayer"
-        tools:layout_editor_absoluteY="435dp"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="128dp"
+            android:src="@mipmap/albumresmi"
+             android:layout_margin="5dp"
+            android:layout_weight="0.2"
+            android:id="@+id/burasiOnemsiz"
+            android:layout_height="128dp" />
+
+        <com.example.jean.jcplayer.JcPlayerView
+            android:id="@+id/jcplayer"
+            android:layout_gravity="center"
+            android:layout_weight="0.8"
+            tools:layout_editor_absoluteY="435dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+             />
+
+
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="bottom"
-        tools:layout_editor_absoluteX="8dp" />
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            tools:layout_editor_absoluteY="0dp"
+            tools:layout_editor_absoluteX="0dp">
+        </android.support.v7.widget.RecyclerView>
+
+
+    </LinearLayout>
+
+
+
+
+
 
 </LinearLayout>

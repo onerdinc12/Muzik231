@@ -1,5 +1,13 @@
 [
     {
+        "merged": "C:\\Users\\Onder\\AndroidStudioProjects\\JcPlayerOlucak\\jcplayer\\build\\intermediates\\res\\merged\\release\\mipmap-xxxhdpi-v4\\ic_player_black.png",
+        "source": "C:\\Users\\Onder\\AndroidStudioProjects\\JcPlayerOlucak\\jcplayer\\src\\main\\res\\mipmap-xxxhdpi\\ic_player_black.png"
+    },
+    {
+        "merged": "C:\\Users\\Onder\\AndroidStudioProjects\\JcPlayerOlucak\\jcplayer\\build\\intermediates\\res\\merged\\release\\mipmap-xxxhdpi-v4\\ic_player_white.png",
+        "source": "C:\\Users\\Onder\\AndroidStudioProjects\\JcPlayerOlucak\\jcplayer\\src\\main\\res\\mipmap-xxxhdpi\\ic_player_white.png"
+    },
+    {
         "merged": "C:\\Users\\Onder\\AndroidStudioProjects\\JcPlayerOlucak\\jcplayer\\build\\intermediates\\res\\merged\\release\\mipmap-xxxhdpi-v4\\ic_launcher.png",
         "source": "C:\\Users\\Onder\\AndroidStudioProjects\\JcPlayerOlucak\\jcplayer\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
     }

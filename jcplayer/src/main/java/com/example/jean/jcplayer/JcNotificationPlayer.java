@@ -16,10 +16,12 @@ import android.widget.RemoteViews;
 public class JcNotificationPlayer implements JcPlayerService.JcPlayerServiceListener {
     public static final int NOTIFICATION_ID = 100;
     public static final int NEXT_ID = 0;
+    public static final int KAPAT_ID = 4;
     public static final int PREVIOUS_ID = 1;
     public static final int PLAY_ID = 2;
     public static final int PAUSE_ID = 3;
     public static final String NEXT = "NEXT";
+    public static final String KAPAT = "KAPAT";
     public static final String PREVIOUS = "PREVIOUS";
     public static final String PAUSE = "PAUSE";
     public static final String PLAY = "PLAY";
@@ -74,7 +76,11 @@ public class JcNotificationPlayer implements JcPlayerService.JcPlayerServiceList
     public void updateNotification(){
         createNotificationPlayer(title, iconResource);
     }
-
+    public  void cancelNotification(Context ctx, int notifyId) {
+        String ns = Context.NOTIFICATION_SERVICE;
+        NotificationManager nMgr = (NotificationManager) ctx.getSystemService(ns);
+        nMgr.cancel(notifyId);
+    }
     private RemoteViews createNotificationPlayerView(){
         RemoteViews remoteView;
 
@@ -90,6 +96,7 @@ public class JcNotificationPlayer implements JcPlayerService.JcPlayerServiceList
         //remoteView.setTextViewText(R.id.txt_duration_notification, time);
         remoteView.setImageViewResource(R.id.icon_player,iconResource);
         remoteView.setOnClickPendingIntent(R.id.btn_next_notification, buildPendingIntent(NEXT, NEXT_ID));
+        remoteView.setOnClickPendingIntent(R.id.btn_finish, buildPendingIntent(KAPAT, KAPAT_ID));
         remoteView.setOnClickPendingIntent(R.id.btn_prev_notification, buildPendingIntent(PREVIOUS, PREVIOUS_ID));
 
         return  remoteView;
@@ -99,8 +106,19 @@ public class JcNotificationPlayer implements JcPlayerService.JcPlayerServiceList
         Intent playIntent = new Intent(context.getApplicationContext(), JcPlayerNotificationReceiver.class);
         playIntent.putExtra(ACTION, action);
 
-        return PendingIntent.getBroadcast(context.getApplicationContext(), id, playIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+            return PendingIntent.getBroadcast(context.getApplicationContext(), id, playIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+
     }
+
+    private PendingIntent cancelPendingIntent(String kapat, int id){
+        Intent cancelIntent = new Intent(context.getApplicationContext(), JcPlayerNotificationReceiver.class);
+        cancelIntent.putExtra(KAPAT, kapat);
+
+        return PendingIntent.getBroadcast(context.getApplicationContext(), id, cancelIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+    }
+
 
     @Override
     public void onPreparedAudio(String audioName, int duration) {

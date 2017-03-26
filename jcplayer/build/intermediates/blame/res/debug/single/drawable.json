@@ -8,6 +8,10 @@
         "source": "C:\\Users\\Onder\\AndroidStudioProjects\\JcPlayerOlucak\\jcplayer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.0.1\\res\\drawable\\abc_btn_default_mtrl_shape.xml"
     },
     {
+        "merged": "C:\\Users\\Onder\\AndroidStudioProjects\\JcPlayerOlucak\\jcplayer\\build\\intermediates\\res\\merged\\debug\\drawable\\resim.png",
+        "source": "C:\\Users\\Onder\\AndroidStudioProjects\\JcPlayerOlucak\\jcplayer\\src\\main\\res\\drawable\\resim.png"
+    },
+    {
         "merged": "C:\\Users\\Onder\\AndroidStudioProjects\\JcPlayerOlucak\\jcplayer\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_previous_white.png",
         "source": "C:\\Users\\Onder\\AndroidStudioProjects\\JcPlayerOlucak\\jcplayer\\src\\main\\res\\drawable\\ic_previous_white.png"
     },

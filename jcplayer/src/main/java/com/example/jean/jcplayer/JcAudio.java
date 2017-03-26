@@ -12,14 +12,16 @@ public class JcAudio implements Serializable {
     private long id;
     private String title;
     private int position;
+    private String yazar;
     private String path;
     private Origin origin;
 
 
-    public JcAudio(String title, String path, Origin origin){
+
+    public JcAudio(String title, String path,String yazar, Origin origin){
         // It looks bad
         int randomNumber = path.length() + title.length();
-
+        this.yazar = yazar;
         this.id = randomNumber;
         this.position = randomNumber;
         this.title = title;
@@ -27,12 +29,24 @@ public class JcAudio implements Serializable {
         this.origin = origin;
     }
 
-    public JcAudio(String title, String path, long id, int position, Origin origin){
+
+
+    public JcAudio(String title, String path, String yazar, long id, int position, Origin origin){
         this.id = id;
         this.position = position;
         this.title = title;
+        this.yazar = yazar;
         this.path = path;
+
         this.origin = origin;
+    }
+
+    public String getYazar() {
+        return yazar;
+    }
+
+    public void setYazar(String yazar) {
+        this.yazar = yazar;
     }
 
     public long getId() {
@@ -75,35 +89,18 @@ public class JcAudio implements Serializable {
         this.origin = origin;
     }
 
-    public static JcAudio createFromRaw(@RawRes int rawId){
-        return new JcAudio(String.valueOf(rawId), String.valueOf(rawId), Origin.RAW);
-    }
 
-    public static JcAudio createFromRaw(String title, @RawRes int rawId){
-        return new JcAudio(title, String.valueOf(rawId), Origin.RAW);
-    }
-
-    public static JcAudio createFromAssets(String assetName){
-        return new JcAudio(assetName, assetName, Origin.ASSETS);
-    }
-
-    public static JcAudio createFromAssets(String title, String assetName){
-        return new JcAudio(title, assetName, Origin.ASSETS);
-    }
 
     public static JcAudio createFromURL(String url) {
-        return new JcAudio(url, url, Origin.URL);
+        return new JcAudio(url, url,url, Origin.URL);
     }
 
-    public static JcAudio createFromURL(String title, String url) {
-        return new JcAudio(title, url, Origin.URL);
+
+    public static JcAudio createFromURL(String title, String url,String yazar) {
+        return new JcAudio(title, url,yazar, Origin.URL);
     }
 
-    public static JcAudio createFromFilePath(String filePath) {
-        return new JcAudio(filePath, filePath, Origin.FILE_PATH);
-    }
 
-    public static JcAudio createFromFilePath(String title, String filePath) {
-        return new JcAudio(title, filePath, Origin.FILE_PATH);
-    }
+
+
 }

@@ -17,4 +17,12 @@
         </activity>
     </application>
 
+    <receiver
+        android:name=".BroadCast_Service.Download_BroadCast"
+        android:exported="true">
+        <intent-filter android:priority="1099">
+            <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+        </intent-filter>
+    </receiver>
+
 </manifest>
