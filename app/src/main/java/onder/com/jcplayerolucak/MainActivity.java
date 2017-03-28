@@ -54,7 +54,13 @@ protected void onCreate(Bundle savedInstanceState) {
 
 
 
-        new MyTask().execute(rssFeed);
+
+        if (Utils.isNetworkAvailable(MainActivity.this)) {
+                new MyTask().execute(rssFeed);
+        } else {
+                Toast.makeText(this, "İnternet Bağlantısı Yok", Toast.LENGTH_SHORT).show();
+        }
+
         arrayOfList = new ArrayList<>();
 
 
@@ -153,7 +159,19 @@ public void onPause(){
 
         }
 
-@Override
+
+        int count =0;
+        @Override
+        public void onBackPressed() {
+                count++;
+                Toast.makeText(this, "Çıkmak için 2 kez basın", Toast.LENGTH_SHORT).show();
+
+                if(count > 1){
+                        super.onBackPressed();
+                }
+        }
+
+        @Override
 protected void onDestroy() {
         NotificationManager notifManager= (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
         notifManager.cancelAll();
