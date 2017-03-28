@@ -32,7 +32,7 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.AudioAdapter
     private Context context;
     private MainActivity activity;
     private List<JcAudio> jcAudioList;
-    int durumNe;
+
 
 
     public AudioAdapter(MainActivity activity) {

@@ -29,15 +29,6 @@
             android:text="@string/text_test"/>
 
         <ImageButton
-            android:id="@+id/btn_pause_notification"
-            android:layout_width="@dimen/touch_default"
-            android:layout_height="@dimen/touch_default"
-            android:background="@drawable/ic_pause_black"
-            android:layout_gravity="center"
-            android:layout_alignTop="@+id/btn_prev_notification"
-            android:layout_centerHorizontal="true" />
-
-        <ImageButton
             android:id="@+id/btn_prev_notification"
             android:layout_width="@dimen/touch_default"
             android:layout_height="@dimen/touch_default"
@@ -66,7 +57,39 @@
             android:layout_width="@dimen/touch_default"
             android:layout_height="@dimen/touch_default"
             android:background="@drawable/ic_next_black"
-            android:layout_alignTop="@+id/btn_pause_notification"
-            android:layout_alignParentEnd="true" />
+
+            android:layout_below="@+id/txt_current_music_notification"
+            android:layout_toRightOf="@+id/txt_duration_notification"
+            android:layout_toEndOf="@+id/txt_duration_notification"
+            android:layout_marginLeft="34dp"
+            android:layout_marginStart="34dp" />
+
+
+
+        <ImageButton
+            android:id="@+id/btn_finish"
+            android:layout_width="@dimen/touch_default"
+            android:layout_height="@dimen/touch_default"
+            android:background="@mipmap/ic_player_black"
+
+            android:layout_below="@+id/txt_current_music_notification"
+            android:layout_toRightOf="@+id/btn_next_notification"
+            android:layout_toEndOf="@+id/btn_next_notification"
+            android:layout_marginLeft="34dp"
+            android:layout_marginStart="34dp" />
+
+
+
+        <ImageButton
+            android:id="@+id/btn_pause_notification"
+            android:layout_width="@dimen/touch_default"
+            android:layout_height="@dimen/touch_default"
+            android:background="@drawable/ic_pause_black"
+            android:layout_gravity="center"
+            android:layout_below="@+id/txt_current_music_notification"
+            android:layout_toLeftOf="@+id/txt_duration_notification"
+            android:layout_toStartOf="@+id/txt_duration_notification"
+            android:layout_marginRight="18dp"
+            android:layout_marginEnd="18dp" />
     </RelativeLayout>
 </LinearLayout>

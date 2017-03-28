@@ -3,7 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/JcPlayerOlucak.iml" filepath="$PROJECT_DIR$/JcPlayerOlucak.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Muzik.iml" filepath="$PROJECT_DIR$/Muzik.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jcplayer/jcplayer.iml" filepath="$PROJECT_DIR$/jcplayer/jcplayer.iml" />
       <module fileurl="file://$PROJECT_DIR$/jcplayer/jcplayer.iml" filepath="$PROJECT_DIR$/jcplayer/jcplayer.iml" />
     </modules>
   </component>
