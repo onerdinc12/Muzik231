@@ -197,7 +197,7 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.AudioAdapter
 
         counter++;
         //2 sayısı kaç muzikte bir reklam çıksın demeyi kast ediyor
-        if(counter == 2){
+        if(counter == 7){
             if (mInterstitialAd.isLoaded()) { //reklam yüklenmişse
                 mInterstitialAd.show(); //reklam gösteriliyor
             }else{
