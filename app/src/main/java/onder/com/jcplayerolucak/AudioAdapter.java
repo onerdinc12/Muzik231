@@ -4,9 +4,11 @@ import android.app.Dialog;
 import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,7 +20,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import com.example.jean.jcplayer.JcAudio;
+import com.google.android.gms.ads.InterstitialAd;
 
 import java.util.List;
 
@@ -32,12 +39,16 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.AudioAdapter
     private Context context;
     private MainActivity activity;
     private List<JcAudio> jcAudioList;
+    private InterstitialAd  mInterstitialAd;
 
 
 
-    public AudioAdapter(MainActivity activity) {
+
+
+    public AudioAdapter(MainActivity activity,InterstitialAd mInterstitialAd) {
         this.activity = activity;
         this.context = activity;
+        this.mInterstitialAd = mInterstitialAd;
     }
 
 
@@ -45,18 +56,25 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.AudioAdapter
     public AudioAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         final View view = LayoutInflater.from(context).inflate(R.layout.audio_item, parent, false);
         AudioAdapterViewHolder audiosViewHolder = new AudioAdapterViewHolder(view);
+
+
         audiosViewHolder.itemView.setOnClickListener(this);
 
 
 
 
         return audiosViewHolder;
+
     }
 
     @Override
     public void onBindViewHolder(AudioAdapterViewHolder holder, final int position) {
         String title = jcAudioList.get(position).getTitle();
         String yazanGrup = jcAudioList.get(position).getYazar();
+
+        final String sozler = jcAudioList.get(position).getSozler();
+
+
         holder.audioTitle.setText(title);
         holder.audioYazar.setText(yazanGrup);
 
@@ -89,16 +107,39 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.AudioAdapter
         });
         //burada indirme işlemi yapılıyor
 
+
+
+
         holder.indir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dm = (DownloadManager) activity.getSystemService(DOWNLOAD_SERVICE);
-                DownloadManager.Request request = new DownloadManager.Request(
-                        Uri.parse(sarkiUrl));
-                enqueue = dm.enqueue(request);
+                final AlertDialog.Builder indirDialog = new AlertDialog.Builder(context);
+                indirDialog.setTitle("Dosya İndirme");
+                indirDialog.setMessage("Muzigi indirmek istiyor musunuz ?");
+
+                indirDialog.setPositiveButton("Evet", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dm = (DownloadManager) activity.getSystemService(DOWNLOAD_SERVICE);
+                        DownloadManager.Request request = new DownloadManager.Request(
+                                Uri.parse(sarkiUrl));
+                        enqueue = dm.enqueue(request);
 
 
-                Toast.makeText(context, "İndirme İşlemi Başladı İndir Butonuna Uzun Basarak Klasörü Açabilirsiniz", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "İndirme İşlemi Başladı İndir Butonuna Uzun Basarak Klasörü Açabilirsiniz", Toast.LENGTH_LONG).show();
+
+                    }
+                });
+
+                indirDialog.setNegativeButton("Hayır", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+                    }
+                });
+
+                indirDialog.show();
 
             }
         });
@@ -117,22 +158,10 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.AudioAdapter
         holder.btnSarkiSozleri.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sarkiSozView.setText(sozler);
 
 
 
-
-                 switch (position){
-                     case 0:
-                         sarkiSozView.setText("Onder Erdinç");
-                         break;
-
-                     case 1:
-                         sarkiSozView.setText("Onder Erdinç 2");
-                         break;
-
-
-
-                 }
                 dialog.show();
             }
         });
@@ -147,8 +176,17 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.AudioAdapter
     public void setupItems(List<JcAudio> jcAudioList) {
         this.jcAudioList = jcAudioList;
         notifyDataSetChanged();
+
+
+
+
+
+
+
     }
 
+
+    int counter = 0;
     @Override
     public void onClick(View view) {
         JcAudio JcAudio = (com.example.jean.jcplayer.JcAudio) view.getTag();
@@ -157,7 +195,25 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.AudioAdapter
 
 
 
+        counter++;
+        //2 sayısı kaç muzikte bir reklam çıksın demeyi kast ediyor
+        if(counter == 2){
+            if (mInterstitialAd.isLoaded()) { //reklam yüklenmişse
+                mInterstitialAd.show(); //reklam gösteriliyor
+            }else{
+                //Reklam yüklenmediyse yapılacak işlemler
+            }
+            counter=0;
+
+        }
+
+
+
+
+
     }
+
+
 
     static class AudioAdapterViewHolder extends RecyclerView.ViewHolder{
         private TextView audioTitle;
@@ -177,12 +233,16 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.AudioAdapter
 
 
 
+
         }
 
 
 
 
     }
+
+
+
     private long enqueue;
     private DownloadManager dm;
     BroadcastReceiver receiver = new BroadcastReceiver() {

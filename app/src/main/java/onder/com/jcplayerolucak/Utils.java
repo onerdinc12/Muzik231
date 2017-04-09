@@ -34,7 +34,7 @@ public class Utils {
                     baos.write(j);
                 }
                 byte[] data = baos.toByteArray();
-                jsonString = new String(data);
+                jsonString = new String(data,"latin5");
             }
         } catch (Exception e) {
             e.printStackTrace();

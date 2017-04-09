@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:orientation="vertical"
-    android:background="@drawable/arkaplan"
+    android:background="@drawable/fenerarka"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
@@ -20,7 +21,7 @@
 
         <ImageView
             android:layout_width="128dp"
-            android:src="@mipmap/albumresmi"
+            android:src="@mipmap/fenerlogo"
              android:layout_margin="5dp"
             android:layout_weight="0.2"
             android:id="@+id/burasiOnemsiz"

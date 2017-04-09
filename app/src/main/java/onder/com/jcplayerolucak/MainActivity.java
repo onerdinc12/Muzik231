@@ -18,6 +18,9 @@ import com.example.jean.jcplayer.JcAudioPlayer;
 import com.example.jean.jcplayer.JcNotificationPlayer;
 import com.example.jean.jcplayer.JcPlayerService;
 import com.example.jean.jcplayer.JcPlayerView;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,18 +36,20 @@ private LinearLayoutManager layoutManager = new LinearLayoutManager(this, Linear
 private JcPlayerView player;
 private RecyclerView recyclerView;
 private AudioAdapter audioAdapter;
+        InterstitialAd mInterstitialAd;
         private static final String rssFeed = "http://formaal.net/jsonparsing.txt";
         private static final String ARRAY_NAME = "student";
         private static final String ID = "id";
         private static final String NAME = "name";
         private static final String URL = "url";
         private static final String YAZAR = "yazar";
+        private static final String BIRTDATE = "birthdate";
         List<Item> arrayOfList;
         ArrayList<JcAudio> jcAudios = new ArrayList<>();
 @Override
 protected void onCreate(Bundle savedInstanceState) {
 
-
+        mInterstitialAd = new InterstitialAd(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -52,6 +57,18 @@ protected void onCreate(Bundle savedInstanceState) {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         player = (JcPlayerView) findViewById(R.id.jcplayer);
 
+
+        mInterstitialAd.setAdUnitId("ca-app-pub-2542754690371777/3865915602"); //reklam id
+
+
+        mInterstitialAd.setAdListener(new AdListener() { //reklamımıza listener ekledik
+                @Override
+                public void onAdClosed() { //reklam kapatıldığı zaman tekrardan reklamın yüklenmesi için
+                        requestNewInterstitial();
+                }
+        });
+
+        requestNewInterstitial();
 
 
 
@@ -66,6 +83,13 @@ protected void onCreate(Bundle savedInstanceState) {
 
 
 
+        }
+        private void requestNewInterstitial() { //Test cihazı Admob dan ban yememek için
+                AdRequest adRequest = new AdRequest.Builder()
+                        .addTestDevice("3FDFC899E76D396E6819BB74CE419F47")
+                        .build();
+
+                mInterstitialAd.loadAd(adRequest);
         }
 
 
@@ -117,6 +141,7 @@ public void playAudio(JcAudio jcAudio){
                                                 objItem.setName(objJson.getString(NAME));
                                                 objItem.setCity(objJson.getString(URL));
                                                 objItem.setGender(objJson.getString(YAZAR));
+                                                objItem.setBirthdate(objJson.getString(BIRTDATE));
 
 
                                                 arrayOfList.add(objItem);
@@ -128,14 +153,15 @@ public void playAudio(JcAudio jcAudio){
                                 // check data...
                                 for(int i =0;i<arrayOfList.size();i++){
                                         Item items = arrayOfList.get(i);
-                                        jcAudios.add(JcAudio.createFromURL(items.getName(),items.getCity(),items.getGender()));
+                                        jcAudios.add(JcAudio.createFromURL(items.getName(),items.getCity(),items.getGender(),items.getBirthdate()));
                                 }
 
-                                jcAudios.add(JcAudio.createFromURL("Göksel Rüya","http://formaal.net/sarki2.mp3","UNİFEB"));
+
 
                                 player.initPlaylist(jcAudios);
                                 player.registerInvalidPathListener(MainActivity.this);
                                 adapterSetup();
+
 
 
 
@@ -146,11 +172,14 @@ public void playAudio(JcAudio jcAudio){
         }
 
 protected void adapterSetup() {
-        audioAdapter = new AudioAdapter(this);
+        audioAdapter = new AudioAdapter(this,mInterstitialAd);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(audioAdapter);
         audioAdapter.setupItems(player.getMyPlaylist());
         }
+
+
+
 
 @Override
 public void onPause(){

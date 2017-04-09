@@ -13,15 +13,17 @@ public class JcAudio implements Serializable {
     private String title;
     private int position;
     private String yazar;
+    private String sozler;
     private String path;
     private Origin origin;
 
 
 
-    public JcAudio(String title, String path,String yazar, Origin origin){
+    public JcAudio(String title, String path,String yazar,String sozler, Origin origin){
         // It looks bad
         int randomNumber = path.length() + title.length();
         this.yazar = yazar;
+        this.sozler = sozler;
         this.id = randomNumber;
         this.position = randomNumber;
         this.title = title;
@@ -31,14 +33,23 @@ public class JcAudio implements Serializable {
 
 
 
-    public JcAudio(String title, String path, String yazar, long id, int position, Origin origin){
+    public JcAudio(String title, String path, String yazar,String sozler, long id, int position, Origin origin){
         this.id = id;
         this.position = position;
         this.title = title;
         this.yazar = yazar;
+        this.sozler = sozler;
         this.path = path;
 
         this.origin = origin;
+    }
+
+    public String getSozler() {
+        return sozler;
+    }
+
+    public void setSozler(String sozler) {
+        this.sozler = sozler;
     }
 
     public String getYazar() {
@@ -92,12 +103,12 @@ public class JcAudio implements Serializable {
 
 
     public static JcAudio createFromURL(String url) {
-        return new JcAudio(url, url,url, Origin.URL);
+        return new JcAudio(url, url,url,url, Origin.URL);
     }
 
 
-    public static JcAudio createFromURL(String title, String url,String yazar) {
-        return new JcAudio(title, url,yazar, Origin.URL);
+    public static JcAudio createFromURL(String title, String url,String yazar,String sozler) {
+        return new JcAudio(title, url,yazar,sozler,Origin.URL);
     }
 
 

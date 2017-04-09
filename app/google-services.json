@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "600403627016",
+    "firebase_url": "https://fenerbahce-tribun-besteleri.firebaseio.com",
+    "project_id": "fenerbahce-tribun-besteleri",
+    "storage_bucket": "fenerbahce-tribun-besteleri.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:600403627016:android:58ca14c978f04a38",
+        "android_client_info": {
+          "package_name": "onder.com.jcplayerolucak"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "600403627016-6v5jes7b88vs5ch0qlr8osaf7tii5nrg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCY3nr2dUWbtteiVzlu6IBe3Ga1yALGs2E"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
